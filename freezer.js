@@ -67,7 +67,6 @@ function onClickHandling(eventInfo, buttonType) {
         if(freezerContents[i].number <= 0) {
           freezerContents.splice(i, 1);
         }
-        //delete if the number is already 1
       }
     }
   }
@@ -96,26 +95,3 @@ function generateFreezer() {
   addItemToFreezer();
   redraw();
 }
-
-
-
-
-
-//
-//
-//
-//
-// addItemToFreezer(item, number)
-//
-// freezerContents: [
-//   {item: ice cream,
-//   number: 2},
-//   {item: pizza,
-//   number: 1}
-// ]
-// //
-// // when pressing plus: add one to number
-// // when pressing minus: deduct the number, if number was 1 delete item
-//when cycling through the whole list: if the entered value is already there just add plus one
-//
-//
