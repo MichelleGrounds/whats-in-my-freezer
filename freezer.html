@@ -1,0 +1,39 @@
+<html>
+
+<head>
+    <script src="./freezer.js" charset="utf-8"></script>
+</head>
+
+<style>
+  h1 {
+    text-align: center;
+  }
+  li {
+    list-style-type: circle;
+  }
+  .list {
+    text-align: center;
+    background-color: rgb(173, 216, 230);
+    padding: 15px;
+    margin: 0px 25px 0px 25px;
+    font-size: 18;
+  }
+  form {
+    text-align: center;
+    padding: 15px;
+  }
+
+</style>
+
+<body>
+  <h1> Freezer contents</h1>
+
+  <form>
+    <input id="item_input" type="text" placeholder="add item to freezer">
+    <button type="button" onClick="generateFreezer()">add</button>
+  </form>
+
+  <div class="list">
+  <p id="freezer"></p></div>
+
+</body>
