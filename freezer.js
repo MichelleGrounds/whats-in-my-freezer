@@ -12,39 +12,48 @@ function addItemToFreezer() {
     id: Math.random()
   });
   freezerContents.sort();
-  document.getElementById('item_input').value='';
+  document.getElementById('item_input').value = '';
+}
+
+function createDivs(numberOfDivsToCreate) {
+  const divs = [];
+
+  for (var i = 0; i < numberOfDivsToCreate; i++) {
+    divs.push(document.createElement('div'))
+  };
+
+  return divs;
+}
+
+function appendElementsToElement(elementToAppendTo, elementsToAppend) {
+  for (var i = 0; i < elementsToAppend.length; i++) {
+    elementToAppendTo.appendChild(elementsToAppend[i]);
+  }
 }
 
 function createList() {
   //create the list element
   list = document.createElement('div');
   for (var i = 0; i < freezerContents.length; i++) {
-    //create the list item
-    var listNumber = document.createElement('div');
-    var listItem = document.createElement('div');
-    var row = document.createElement('div');
-    var minusButton = document.createElement('div');
-    var plusButton = document.createElement('div');
+    //create the list items
+    var [listNumber, listItem, row, minusButton, plusButton] = createDivs(5);
 
     // create ids
     minusButton.id = freezerContents[i].id;
     plusButton.id = freezerContents[i].id;
 
     // add classes
-    row.className="freezerRow";
-    minusButton.className="fa fa-minus freezerButton";
-    plusButton.className="fa fa-plus freezerButton";
+    row.className = "freezerRow";
+    minusButton.className = "fa fa-minus freezerButton";
+    plusButton.className = "fa fa-plus freezerButton";
 
     //set its contents
-    listNumber.appendChild(document.createTextNode(freezerContents[i].number));
-    listItem.appendChild(document.createTextNode(freezerContents[i].item));
+    appendElementsToElement(listNumber, [document.createTextNode(freezerContents[i].number)]);
+    appendElementsToElement(listItem, [document.createTextNode(freezerContents[i].item)]);
 
     //add it to the list
-    row.appendChild(listNumber)
-    row.appendChild(listItem);
-    row.appendChild(minusButton);
-    row.appendChild(plusButton);
-    list.appendChild(row);
+    appendElementsToElement(row, [listNumber, listItem, minusButton, plusButton]);
+    appendElementsToElement(list, [row])
   };
 };
 
@@ -55,16 +64,16 @@ function writeListToHtml() {
 function onClickHandling(eventInfo, buttonType) {
   if (buttonType == "plus") {
     for (var i = 0; i < freezerContents.length; i++) {
-      if (freezerContents[i].id == eventInfo.target.id){
+      if (freezerContents[i].id == eventInfo.target.id) {
         freezerContents[i].number++;
       }
     }
   }
   if (buttonType == "minus") {
     for (var i = 0; i < freezerContents.length; i++) {
-      if (freezerContents[i].id == eventInfo.target.id){
+      if (freezerContents[i].id == eventInfo.target.id) {
         freezerContents[i].number--;
-        if(freezerContents[i].number <= 0) {
+        if (freezerContents[i].number <= 0) {
           freezerContents.splice(i, 1);
         }
       }
@@ -78,10 +87,10 @@ function addOnClicks() {
   var minusButtonClick = document.getElementsByClassName("fa-minus");
 
   for (var i = 0; i < plusButtonClick.length; i++) {
-    plusButtonClick[i].onclick = function(event) { onClickHandling(event, "plus");}
+    plusButtonClick[i].onclick = function (event) { onClickHandling(event, "plus"); }
   }
   for (var i = 0; i < minusButtonClick.length; i++) {
-    minusButtonClick[i].onclick = function(event) { onClickHandling(event, "minus");}
+    minusButtonClick[i].onclick = function (event) { onClickHandling(event, "minus"); }
   }
 }
 
